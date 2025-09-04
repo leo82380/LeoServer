@@ -36,9 +36,9 @@ namespace LeoServer.Client
                     onMessage?.Invoke(this, message);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // 연결 오류 처리
+                Logger.LogError(ex.Message);
             }
             finally
             {
