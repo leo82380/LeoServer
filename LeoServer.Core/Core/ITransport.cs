@@ -1,3 +1,5 @@
+using System;
+
 namespace LeoServer.Core
 {
     public interface ITransport
