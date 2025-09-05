@@ -1,7 +1,6 @@
 using System;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using LeoServer.Core;
 using LeoServer.Tool;
 
@@ -23,6 +22,11 @@ namespace LeoServer.Client
             IsConnected = true;
         }
 
+        /// <summary>
+        /// 클라이언트의 메시지 전송 및 연결 해제 관리 함수
+        /// </summary>
+        /// <param name="onMessage">메시지 전송 이벤트</param>
+        /// <param name="onDisconnect">연결 해제 이벤트</param>
         public async void StartReceiving(Action<IClientConnection, string> onMessage, Action onDisconnect)
         {
             var buffer = new byte[1024];
@@ -47,6 +51,10 @@ namespace LeoServer.Client
             }
         }
 
+        /// <summary>
+        /// 메시지 전송 이벤트
+        /// </summary>
+        /// <param name="message"></param>
         public async void SendMessage(string message)
         {
             if (!IsConnected) return;
@@ -54,11 +62,17 @@ namespace LeoServer.Client
             await _stream.WriteAsync(data, 0, data.Length);
         }
 
+        /// <summary>
+        /// 서버에 연결되었을 때 호출되는 함수
+        /// </summary>
         public void Connected()
         {
             Logger.Log($"Client Connected");
         }
 
+        /// <summary>
+        /// 서버에 연결이 해제되었을 때 호출되는 함수
+        /// </summary>
         public void Disconnect()
         {
             Logger.Log($"Client Disconnected");
