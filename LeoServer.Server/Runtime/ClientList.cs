@@ -40,7 +40,7 @@ namespace LeoServer.Runtime
             _currentClient.Clear();
         }
 
-        public string GetClients()
+        public string GetClientsString()
         {
             StringBuilder sb = new();
             for (int i = 0; i < _currentClient.Count; i++)
@@ -50,6 +50,11 @@ namespace LeoServer.Runtime
             }
 
             return sb.ToString();
+        }
+
+        public IReadOnlyList<IClientConnection> GetClients()
+        {
+            return _currentClient;
         }
     }
 }

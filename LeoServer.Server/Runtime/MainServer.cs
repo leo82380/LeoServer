@@ -79,7 +79,21 @@ namespace LeoServer.Runtime
 
         public string GetJoinedClients()
         {
+            return _clientList.GetClientsString();
+        }
+
+        public IReadOnlyList<IClientConnection> GetConnections()
+        {
             return _clientList.GetClients();
+        }
+
+        public void Broadcast(string message)
+        {
+            foreach (var client in GetConnections())
+            {
+                if (client.IsConnected)
+                    client.SendMessage(message);
+            }
         }
     }
 }

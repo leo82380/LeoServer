@@ -1,4 +1,5 @@
 ﻿using LeoServer.Runtime;
+using LeoServer.Tool;
 using LeoServer.Transport;
 
 namespace LeoServer.Main
@@ -11,30 +12,19 @@ namespace LeoServer.Main
             server.Initialize(new TcpTransport());
             server.Start();
 
+            var commandHandler = new CommandHandler();
+            commandHandler.AddCommand("exit", server.Stop);
+            commandHandler.AddCommand("checkClient", () => Logger.Log(server.GetJoinedClients()));
+            commandHandler.AddCommand("broadcast", () => server.Broadcast("Hello Clients"));
+
             Console.WriteLine("Server Running. Type 'CheckClient' to see connected clients.");
 
             while (true)
             {
-                string input = Console.ReadLine()?.Trim();
+                string input = Console.ReadLine()?.Trim().ToLower();
 
-                if (string.IsNullOrEmpty(input))
-                    continue;
-
-                if (input.Equals("exit", StringComparison.OrdinalIgnoreCase))
-                {
-                    break;
-                }
-                else if (input.Equals("CheckClient", StringComparison.OrdinalIgnoreCase))
-                {
-                    Console.WriteLine(server.GetJoinedClients());
-                }
-                else
-                {
-                    Console.WriteLine("Unknown command");
-                }
+                commandHandler.InvokeCommand(input);
             }
-
-            server.Stop();
         }
     }
 }
