@@ -61,6 +61,7 @@ namespace LeoServer.Runtime
         private void HandleMessageReceived(IClientConnection connection, string message)
         {
             Logger.Log($"[Client {connection.Id}] {message}");
+            Broadcast(message);
         }
 
         private void HandleClientConnection(IClientConnection client, bool isConnected)
