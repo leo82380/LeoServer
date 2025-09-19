@@ -33,4 +33,14 @@
 
 ---
 
+### 4️⃣ 플레이어 스폰 시스템 만들기
+🔗 [개발소리 - 서버 공부 4일차](https://leo82380.tistory.com/entry/%EA%B0%9C%EB%B0%9C%EC%86%8C%EB%A6%AC-%EC%84%9C%EB%B2%84-%EA%B0%9C%EB%B0%9C-4%EC%9D%BC%EC%B0%A8)
+
+> LeoClientMono의 구조를 변경하고, NetworkManager를 만들어 서버 접속을 관리하도록 구현하였습니다.  
+> 주요 작업:  
+> - `NetworkManager` , `NetworkManagerPlayer`  구현  
+> - 플레이어 스폰 구현
+
+---
+
 👉 앞으로도 꾸준히 서버 공부를 기록하며 발전해 나가겠습니다.
